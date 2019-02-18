@@ -1,0 +1,136 @@
+<ion-view title="eComplaint" can-swipe-back="false">
+
+  <div class="tabs-top tabs-background-light tabs-color-positive">
+    <div class="tabs">
+      <a class="tab-item {{ generals }} full-width-tab " style="font-weight:500;border-bottom:{{generals == 'active' ? '5px solid #2980b9' : '5px solid #ecf0f1'}};border-right:{{generals == 'active' ? '1px solid #2980b9' : '1px solid #ecf0f1'}}" id="generaltab" ng-show="slideIndex = 1">
+        <i style="font-weight:500;letter-spacing:-0.5px;color:{{generals == 'active' ? ' #2980b9' : '#ecf0f1'}}" class="dark">{{ 'track' | translate }}</i>
+      </a>
+      <a class="tab-item {{ propertys }} full-width-tab" style="font-weight:500;border-bottom:{{propertys == 'active' ? '5px solid #2980b9' : '5px solid #ecf0f1'}};border-left:{{propertys == 'active' ? '1px solid #2980b9' : '1px solid #ecf0f1'}};" id="propertytab" ng-show="slideIndex = 2">
+        <i style="font-weight:500;letter-spacing:-0.5px;color:{{propertys == 'active' ? ' #2980b9' : '#ecf0f1'}}" class="dark">{{ 'add_new' | translate }}</i>
+      </a>
+    </div>
+  </div>
+
+  <ion-content class="has-footer" scroll="false">
+    <div style="width:100vw;height: 100vh;background-color: rgba(0,0,0, 0.7);z-index: 3;position: absolute;top: 0;">
+            <!-- modal -->
+            <div class="contentComplaint" style="width: 80vw;">
+                <center>
+                    <p style="font-weight: bold;font-size: 14px;margin-top: 1em;">{{ title }}</p>
+                </center>
+                <input type="hidden" ng-model="searchText">
+                
+                <form name="myform">
+                    <div class="row" style="padding: 1.5em;">
+                        <div class="col" style="width: 100%;">
+                          <ion-scroll zooming = "true" direction = "y" style = "width: 100%; height: auto;margin-bottom: 1em;">
+                          <div ng-repeat="data in allDataList | filter:searchText" style="height: 12em;margin-top: 0.1em;margin-bottom: 0em;">
+                            
+                            <p style="color: lightgrey;font-size: 12px;">{{data.Description}}</p>
+                            
+                            <div ng-if="data.ListImage[0] != null"class="row">
+                                <div class="col" style="padding: 1em;">
+                                    <iframe width="100%" src="{{data.ListImage[0] | trustAsResourceUrl}}"></iframe>
+                                </div>
+                            </div>
+                            <div ng-if="data.ListImage[0] == null" class="row">
+                                &nbsp;
+                            </div>
+                            
+                            <div ng-if="data.ListImage[1] != null"class="row">
+                                <div class="col" style="padding: 1em;">
+                                    <iframe width="100%" src="{{data.ListImage[1] | trustAsResourceUrl}}"></iframe>
+                                </div>
+                            </div>
+                            <div ng-if="data.ListImage[1] == null" class="row">
+                                &nbsp;
+                            </div>
+                          </div>
+                          </ion-scroll>
+                            <div class="row" style="margin-bottom: 0;padding-bottom: 0;">
+                              <div align="center" class="col" style="margin-bottom: 0;padding-bottom: 0;margin-top:1em;">
+                                <a class="button button-positive" href="#/app/eComplaintList" style="position:relative;width: 50%;border-radius: 15px;padding:0 2%;display:flex;align-items:center;justify-content:center;min-height:0;border:0;outline:0;color:white;background-color:#2980b9;height: 2.5em;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);margin-right: 0;margin-top: 1em;margin-bottom: 0;font-size: 10px;">
+                                  Done
+                                </a>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    <ion-slide-box on-slide-changed="slideChanged(index)" show-pager="false">
+
+      <ion-slide>
+        <!-- Start : Saturday & Sunday -->
+        <div class="row" style="height:auto">
+          <ion-bar class="bar bar-subheader bar-stable" style="border:0;outline:0">
+            <div class="row">
+              <div class="col col-50">
+
+              </div>
+              <div class="col col-50">
+                <select ng-model="sortBy" class="dropdown-filter">
+                  <option value="">{{ 'sort' | translate }}</option>
+                  <option value="-tanggal">{{'number'|translate}}</option>
+                  <option value="StatusCase">Status</option>
+                </select>
+              </div>
+            </div>
+          </ion-bar>
+
+          <ion-content style="margin-top:8em;" class="has-footer" scroll="false">
+            <div class="list" style="margin-top:0em;">
+              <div class="item" ng-repeat="item in allDataList | orderBy : sortBy | filter :search_page" style="margin-bottom:0;margin-top:-1%;margin-left: 0 !important;padding:0.5em;">
+                  <div class="row">
+                    <div class="col col-100">
+                        <h6 style="color:black;font-size:8px;margin-bottom:-2%;text-align:left;font-weight:500;">
+                        {{ item.CaseNumber }}
+                        </h6>
+                      </div>
+                  </div>
+                  <div class="row" style="margin-top:0%;">
+                      <div class="col col-50">
+                        <h5 style="color:black;font-size:13px;margin-bottom:-2%;text-align:left;font-weight:500;">
+                        {{ item.HelpName }}
+                        </h5>
+                      </div>
+                      <div class="col col-50">
+                        <p align="center" style="color:black;font-size:10px;margin-bottom: -6%;text-align:center;font-weight:500;margin-right: 0.5em;margin-top:-0.5em;margin-left: 2.5em;">
+                         {{item.tanggal | date : "dd/MM/y"}}
+                        </p>
+                      </div>
+                  </div>
+
+                <div class="row">
+                    <p ng-if="item.Description != null" class="col col-offset-70" style="color:grey;font-size:10px;text-align:left;font-weight:500;">
+                        {{item.Description}}
+                    </p>
+                    <p ng-if="item.Description == null" class="col col-offset-70" style="color:grey;font-size:10px;text-align:left;font-weight:500;">
+                        &nbsp;
+                    </p>
+                    <div class="col col-30" align="right" style="text-align: right;float: right;margin-left: 4.5em;">
+                      <a class="button button-positive" style="position:absolute;width: 30%;border-radius: 15px;padding:0 2%;display:flex;align-items:center;justify-content:center;min-height:0;border:0;outline:0;color:white;background-color:#2980b9;height: 2.5em;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);margin-right: 0;margin-top: -0.5em;font-size: 10px;">
+                          {{item.StatusCase}} 
+                      </a>
+                    </div>
+                </div>
+              </div>  
+            </div>    
+          </ion-content>
+        </div>
+        <!-- End : Saturday & Sunday -->
+      </ion-slide>
+
+      <ion-slide>
+        <!-- Start : Monday - Friday -->
+        <div class="row" style="height:auto">
+          <ion-content style="background-color: rgb(236, 240, 241);padding:1em;">
+          </ion-content>
+        </div>
+        <!-- End : Monday - Friday -->
+      </ion-slide>
+
+    </ion-slide-box>
+  </ion-content>

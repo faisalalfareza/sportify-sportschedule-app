@@ -1,0 +1,36 @@
+<ion-view view-title="Team">
+    <ion-bar class="bar bar-subheader bar-stable" style="border:0;outline:0">
+        <div class="row">
+            <div class="col col-50">
+                <span>
+                    <select ng-model="byCategory" class="dropdown-filter">
+                        <option value="">{{ 'category_all' | translate }}</option>
+                        <option value="{{ category.categoryValue }}" ng-repeat="category in cat | orderBy:'categoryName'">{{ category.categoryName }}</option>
+                    </select>
+                </span>
+            </div>
+            <div class="col col-50">
+                <select ng-model="sortType" class="dropdown-filter">
+                    <option value="">{{ 'sort' | translate }}</option>
+                    <option value="teamname">Team name</option>
+                    <option value="teammember">Team member</option>
+                    <option value="teampremium">Premium team</option>
+                </select>
+            </div>
+        </div>
+    </ion-bar>
+    <ion-content style="margin-top:45px;" class="has-footer">
+        <ion-list>
+            <ion-item class="item item-thumbnail-left" ng-repeat="list in teamdata" href="#/app/teamDetail/{{list.idteam}}">
+                <img src="img/items/item_sport.png">
+                <h2 style="font-weight:500;font-size:18px;">{{list.teamname}}</h2>
+                <p> {{list.interest}} </p>
+                <p> {{list.team}} members </p>
+                <fieldset ng-show="{{list.premium}}" class="ratingbtn" disabled="true" style="margin:0;padding:2px 0 0 0">
+                    <input ng-checked="true" type="checkbox" id="star5" name="rating" value="5" />
+                    <label class="full" for="star5" title="5"></label>
+                </fieldset>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

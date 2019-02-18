@@ -1,0 +1,89 @@
+<ion-view view-title="{{teamDetail.teamname}}">
+    <div class="tabs-striped tabs-top tabs-background-stable tabs-color-light tabs-icon-left">
+        <div class="tabs" style="background-color:#E3F2FD;border:0;">
+            <a class="tab-item" href="#">
+                <i class="icon ion-ios-search"></i> Find Match
+            </a>
+            <a class="tab-item" href="#">
+                <i class="icon ion-ios-location-outline"></i> Map
+            </a>
+        </div>
+    </div>
+    <ion-content style="margin-top:50px;">
+        <div class="row thumbnailGaleri">
+            <div class="col thumbnailimg1">
+                <a ng-if="img.avatar != null" ng-href="#/app/tenantDetailImage/{{img.idtenant}}/{{$index + 0}}">
+                    <img height="253" class="col" ng-src="{{img.avatar != null ? img.avatar : 'img/items/property_add_photo.png'}}">
+                </a>
+                <a ng-if="img.avatar == null">
+                    <img height="253" class="col" ng-src="img/items/property_add_photo.png">
+                </a>
+            </div>
+
+            <div class="col thumbnailGaleri">
+                <a ng-if="img1.avatar != null" ng-href="#/app/tenantDetailImage/{{img.idtenant}}/{{$index + 1}}">
+                    <img height="126" style="background-repeat:no-repeat;background-size: cover;background-attachment:fixed;" class="col" ng-src="{{img1.avatar != null ? img1.avatar : 'img/items/property_add_photo.png'}}">
+                </a>
+                <a ng-if="img1.avatar == null">
+                    <img height="126" style="background-repeat:no-repeat;background-size: cover;background-attachment:fixed;" class="col" ng-src="img/items/property_add_photo.png">
+                </a>
+
+                <a ng-if="img2.avatar != null" ng-href="#/app/tenantDetailImage/{{img.idtenant}}/{{$index + 2}}">
+                    <img height="126" class="col" ng-src="{{img2.avatar != null ? img2.avatar : 'img/items/property_add_photo.png'}}">
+                </a>
+                <a ng-if="img2.avatar == null">
+                    <img height="126" class="col" ng-src="img/items/property_add_photo.png">
+                </a>
+            </div>
+        </div>
+
+
+        <div class="contentTenant" style="margin-bottom:6%">
+            <h4>
+                <p>{{teamDetail.teamname}}</p>
+            </h4>
+            <div class="row">
+                <p id="category">{{teamDetail.interest}}</p>
+            </div>
+            <div class="row">
+                <div class="col" style="padding: 0;margin-top:0">
+                    <i id="openhours">{{teamDetail.team}} members</i>
+                </div>
+                <div class="col col-33 openhour" style="padding-left: 0" ng-show="{{teamDetail.premium}}">
+                    <i style="vertical-align: middle">
+                        <img width="8" height="8" class="indicator_hour" src="img/circular.png">
+                        PREMIUM
+                    </i>
+                </div>
+            </div>
+        </div>
+        <div style="padding-left: 8%;padding-right: 8%;padding-top: 2%" class="contentTenantBottom">
+            <div class="row" style="">
+                <div class="col col-10">
+                    <img height="18" width="18" src="img/tenantDetail/tenant_map.png">
+                </div>
+                <div class="col col-90">
+                    <i>{{teamDetail.address}}</i>
+                </div>
+            </div>
+        </div>
+        <div style="padding-left: 8%;padding-right: 8%;padding-top: 2%" class="contentTenantBottom">
+            <div class="row" style="border-top:0.5px solid;border-top-color: #0c60ee">
+                <div class="col col-10">
+                    <i class="icon ion-ios-people" style="font-size: 18px"></i>
+                </div>
+                <div class="col col-90">
+                    <i>Members :</i>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-50">
+                    <p ng-repeat="member in teamMembers1 | limitTo: 5">- {{member.name}}</p>
+                </div>
+                <div class="col col-50">
+                    <p ng-repeat="member in teamMembers2 | limitTo: 4">- {{member.name}}</p>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

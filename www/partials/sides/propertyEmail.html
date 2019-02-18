@@ -1,0 +1,40 @@
+<ion-view view-title="Email">
+    <ion-nav-bar class="bar bar-positive bar-custom" style="background-color: #0081c9;">
+      <ion-nav-back-button class="button-icon">
+        <i class="ion-chevron-left"></i>
+      </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content class="padding comment-page has-footer" style="margin-bottom:15px">
+        <div class="row">
+            <div ng-if="propertydata.agentavatar == '' || propertydata.agentavatar == null">
+                    <img ng-src="img/defaultavatar.png" style="width: 75px; height: 75px; border-radius: 50%; margin: 20px 0 0 0">
+            </div>
+            <div ng-if="propertydata.agentavatar != '' && propertydata.agentavatar != null">
+                <img ng-src="{{propertydata.agentavatar}}" style="width: 75px; height:75px; border-radius: 50%; margin: 20px 0 0 0">
+            </div>
+            <p style="margin-top:3em;margin-left:1em;">{{propertydata.agentname}}</p>
+        </div>
+        <form ng-submit="sending(email)" ng-controller="sendEmail" style="margin-top:1em;">
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input text">
+                        <textarea name="description" placeholder="Description*" rows="20" ng-model="email.desc" ng-required="true"></textarea>
+                    </label>
+                    <br>
+                        <input type='hidden' value='{{getRandomSpan}}' id='top-text' />
+                    <img style="position:absolute;width: 100px;height: 50px;background-color: #387ef5;" ng-hide="true" id="start-image" src="img/white.png" alt=""/>
+                    <center><canvas id="memecanvas" style="background-color: #387ef5;">
+                            Sorry, canvas not supported
+                    </canvas></center>
+                    <br>
+                    <label class="item item-input text">
+                        <textarea name="captcha" placeholder="Captcha" rows="1" style="width: 50%;" ng-model="email.cap" ng-required="true"></textarea>
+                    </label>
+                    <br>
+                    <center><button style="border-radius: 30px;" class="button" type="submit" style="background-color:#0D6DB6;border:0;outline:0;color:white;">{{ 'send_email' | translate }}</button></center>
+                    <center><img ng-src="img/reality.png" style="margin-top:2em;width: 75px; height:auto"></center>
+                </div>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

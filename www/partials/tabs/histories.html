@@ -1,0 +1,100 @@
+<ion-view view-title="History">
+    <div class="tabs-top tabs-background-light tabs-color-positive">
+        <div class="tabs">
+            <a class="tab-item {{ inprogress }} full-width-tab " style="font-weight:500;border-bottom:{{inprogress == 'active' ? '5px solid #2980b9' : '5px solid #ecf0f1'}};border-right:{{inprogress == 'active' ? '1px solid #2980b9' : '1px solid #ecf0f1'}}" ng-click="general()"
+                id="generaltab" ng-show="slideIndex = 1">
+                <i style="font-weight:500;letter-spacing:-0.5px;color:{{inprogress == 'active' ? ' #2980b9' : '#ecf0f1'}}" class="dark">In Progress</i>
+            </a>
+            <a class="tab-item {{ completed }} full-width-tab" style="font-weight:500;border-bottom:{{completed == 'active' ? '5px solid #2980b9' : '5px solid #ecf0f1'}};border-left:{{completed == 'active' ? '1px solid #2980b9' : '1px solid #ecf0f1'}};" ng-click="property()"
+                id="propertytab" ng-show="slideIndex = 2">
+                <i style="font-weight:500;letter-spacing:-0.5px;color:{{completed == 'active' ? ' #2980b9' : '#ecf0f1'}}" class="dark">Completed</i>
+            </a>
+        </div>
+    </div>
+
+    <ion-content class="has-footer">
+
+        <ion-slide-box on-slide-changed="slideChanged(index)" show-pager="false">
+
+            <ion-slide>
+                <!-- Start : Saturday & Sunday -->
+                <div class="row" style="height:auto">
+                    <ion-bar class="bar bar-subheader bar-stable" style="border:0;outline:0">
+                        <div class="row">
+                            <div class="col col-50"></div>
+                            <div class="col col-50">
+                                <select ng-model="sortByInprogress" class="dropdown-filter">
+                                    <option value="">{{ 'sort' | translate }}</option>
+                                    <option value="visitdate">Date</option>
+                                </select>
+                            </div>
+                        </div>
+                    </ion-bar>
+
+                    <ion-content style="margin-top:8em;">
+                        <ion-content style="padding:0px 5px 0px 5px;">
+                            <<ion-list>
+                                <ion-item class="item item-avatar" ng-repeat="list in inprogressList  | orderBy: sortByInprogress" style="border:0;outline:0;padding:0">
+                                    <div class="row" style="padding:0;">
+                                        <div class="col col-20" style="text-align:center;vertical-align:middle">
+                                            <img style="width:30px;" src="img/tabs/history_publicservice.png">
+                                        </div>
+                                        <div class="col col-80" style="border-left:5px solid #2980b9;padding-left:20px;position:relative;">
+                                            <div style="background-image: url('img/rounden_blue.png');background-repeat:no-repeat;background-size:contain;height:1em;width:100%;position:absolute;left:-0.6em;top:0.6em;z-index:1"></div>
+                                            <h2 style="font-weight:500;font-size:18px;"> {{list.activities}} </h2>
+                                            <h3 style="color:#7f8c8d;"> {{list.categoryname}} </h3>
+                                            <div style="text-align:right;font-size:10px;color:#7f8c8d;">{{list.visitdate | elapsed }}</div>
+                                        </div>
+                                    </div>
+                                </ion-item>
+                                </ion-list>
+                        </ion-content>
+                    </ion-content>
+                </div>
+                <!-- End : Saturday & Sunday -->
+            </ion-slide>
+
+            <ion-slide>
+                <!-- Start : Monday - Friday -->
+                <div class="row" style="height:auto">
+                    <ion-bar class="bar bar-subheader bar-stable" style="border:0;outline:0">
+                        <div class="row">
+                            <div class="col col-50"></div>
+                            <div class="col col-50">
+                                <select ng-model="sortByCompleted" class="dropdown-filter">
+                                    <option value="">{{ 'sort' | translate }}</option>
+                                    <option value="visitdate">Date</option>
+                                </select>
+                            </div>
+                        </div>
+                    </ion-bar>
+
+                    <ion-content style="margin-top:8em;">
+                        <ion-content style="margin-top:25px;">
+                            <ion-list>
+                                <ion-item class="item item-avatar" ng-repeat="list in completedList | orderBy: sortByCompleted" style="border:0;outline:0;padding:0">
+                                    <div class="row" style="padding:0;">
+                                        <div class="col col-20" style="text-align:center;vertical-align:middle">
+                                            <img style="width:30px;" src="img/tabs/history_publicservice.png">
+                                        </div>
+                                        <div class="col col-80" style="border-left:5px solid #2980b9;padding-left:20px;position:relative;">
+                                            <div style="background-image: url('img/rounden_blue.png');background-repeat:no-repeat;background-size:contain;height:1em;width:100%;position:absolute;left:-0.6em;top:0.6em;z-index:1"></div>
+                                            <h2 style="font-weight:500;font-size:18px;"> {{list.activities}} </h2>
+                                            <h3 style="color:#7f8c8d;"> {{list.categoryname}} </h3>
+                                            <div style="text-align:right;font-size:10px;color:#7f8c8d;">{{list.visitdate | elapsed }}</div>
+                                        </div>
+                                    </div>
+                                </ion-item>
+                            </ion-list>
+                            <ion-infinite-scroll on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
+                        </ion-content>
+                </div>
+                <!-- End : Monday - Friday -->
+            </ion-slide>
+
+        </ion-slide-box>
+        </ion-content>
+        <!--<ion-content class="has-expanded-header">
+
+</ion-content>-->
+</ion-view>

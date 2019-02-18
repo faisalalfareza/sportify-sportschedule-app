@@ -1,0 +1,34 @@
+<ion-view hide-nav-bar="true" hide-tabs>
+  <ion-content>
+      <div align="center" style="position: absolute;margin-left: -17em;margin-top: 5em;margin-bottom:5em;" class="row responsive-md">
+        <div align="center" style="position: relative;">
+          <div class="col-100">
+            <a>
+              <img src="img/cctv/icon_f_fullscreen.png" style="width:7%;height:auto; margin: 0;">
+            </a>
+          </div>
+          <div class="col-100">
+            <h3 style="font-size:10px;color:white;">Full Screen</h3>
+          </div>
+          <div class="col-100">
+            <a ng-click="potraitTheater()"> <!--ng-click="playFull()"-->
+              <img src="img/cctv/icon_f_theater.png" style="width:7%;height:auto; margin: 0;">
+            </a>
+          </div>
+          <div class="col-100">
+            <h3 style="font-size:10px;color:white;">Theater</h3>
+          </div>
+          <div class="col-100">
+            <a ng-click="potrait()" > <!-- ng-href="#/app/cctvList" ng-click="playFull()"-->
+              <img src="img/cctv/icon_t_list.png" style="width:7%;height:auto; margin: 0;">
+            </a>
+          </div>
+          <div class="col-100">
+            <h3 style="font-size:10px;color:white;">List</h3>
+          </div>
+        </div>
+      </div>
+
+    <iframe src="{{port}}" style="margin:0;width: 100vw;height: 100vh;" allowfullscreen></iframe>
+  </ion-content>
+</ion-view>
